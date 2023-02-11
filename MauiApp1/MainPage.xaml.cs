@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-		var x = new Class1();
+		var x = new Spezies();
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
