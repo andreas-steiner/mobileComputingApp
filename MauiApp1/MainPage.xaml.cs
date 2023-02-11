@@ -1,30 +1,23 @@
-﻿using Shared;
+﻿using MauiApp1.Services;
+using Shared;
 
 namespace MauiApp1;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    private readonly DataStore dataStore;
 
-	public MainPage()
-	{
-		InitializeComponent();
-		var x = new Spezies();
-	}
+    public MainPage(DataStore dataStore)
+    {
+        InitializeComponent();
+        list.ItemsSource = dataStore.AllSpecies();
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		lblmaui.Text = "Hallo";
-
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+        this.dataStore = dataStore;
+    }
+    
+    //public async Task click()
+    //{
+    //    await Navigation.PushAsync(new DetailPage(dataStore, ...));
+    //}
 }
 

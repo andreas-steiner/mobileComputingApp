@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.DetailPage"
+             Title="DetailPage">
+    <ScrollView>
+        <Grid Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".3*"></ColumnDefinition>
+                <ColumnDefinition Width=".7*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="TitleLabel"
+                    Text="Edit Species"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontSize="Large"></Label>
+            <Label Text="Species name"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesName"
+                    Text="{Binding SpeciesName, Mode=TwoWay}"			   	   
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species speed"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesSpeed"
+                    Text="{Binding SpeciesSpeed, Mode=TwoWay}"			   	   
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species ability score"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesAbilityScores"
+                    Text="{Binding SpeciesAbilityScores, Mode=TwoWay}"			   	   
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species alignement"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesAlignement"
+                    Text="{Binding SpeciesAlignement, Mode=TwoWay}"			   	   
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species age"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesAge"
+                    Text="{Binding SpeciesAge, Mode=TwoWay}"			   	   
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species size"
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesSize"
+                    Text="{Binding SpeciesSize, Mode=TwoWay}"			   	   
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species starting proficency"
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesStartingProficenies"
+                    Text="{Binding SpeciesStartingProficenies, Mode=TwoWay}"			   	   
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species language"
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesLangs"
+                    Text="{Binding SpeciesLangs, Mode=TwoWay}"			   	   
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species traits"
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesTraits"
+                    Text="{Binding SpeciesTraits, Mode=TwoWay}"			   	   
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species sub races"
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesSubRaces"
+                    Text="{Binding SpeciesSubRaces, Mode=TwoWay}"			   	   
+                    Grid.Row="10"
+                    Grid.Column="1"
+                    VerticalOptions="Center"></Entry>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiApp1.Services;
+using Microsoft.Extensions.Logging;
 
 namespace MauiApp1;
 
@@ -15,6 +16,8 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+		builder.Services.AddSingleton<DataStore, MockDataStore>();
+		builder.Services.AddTransient<MainPage>();
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
