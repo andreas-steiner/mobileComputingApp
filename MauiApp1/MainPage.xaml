@@ -4,7 +4,7 @@
              Title="Species"
              x:Class="MauiApp1.MainPage">
     <StackLayout>
-        <ListView x:Name="list" Header="Species Overview"
+        <ListView x:Name="list"
                   ItemTapped="OnSpeciesTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -14,8 +14,14 @@ public static class MockData {
 					{
 						Id = 1,
 						Name = "Dwarvish"
-					}
-				},
+					},
+
+                    new Lang()
+                    {
+                        Id = 2,
+                        Name = "common"
+                    }
+                },
 				Traits = new List<Trait>()
 				{
 					new Trait()
