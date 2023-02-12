@@ -12,6 +12,9 @@ namespace MauiApp1.Services {
 			return Task.FromResult(_species);
 		}
 
+		public Task<Species> SpeciesGet(int id) {
+			return Task.FromResult(_species.FirstOrDefault(f => f.Id == id));
+		}
 		public Task<Species> SpeciesAdd(Species species) {
 			species.Id = _species.Max(m => m.Id) + 1;
 			species.LastEdited = DateTime.Now;
@@ -49,6 +52,15 @@ namespace MauiApp1.Services {
 		}
 
 
+		public Task<Lang> LangGet(int speciesId, int id) {
+			var species = _species
+				.FirstOrDefault(f => f.Id == id);
+
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{speciesId}'.");
+
+			return Task.FromResult(species.Langs.FirstOrDefault(f => f.Id == id));
+		}
 		public Task<Lang> LangAdd(int id, Lang lang) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
@@ -116,6 +128,15 @@ namespace MauiApp1.Services {
 		}
 
 
+		public Task<Trait> TraitGet(int speciesId, int id) {
+			var species = _species
+				.FirstOrDefault(f => f.Id == id);
+
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{speciesId}'.");
+
+			return Task.FromResult(species.Traits.FirstOrDefault(f => f.Id == id));
+		}
 		public Task<Trait> TraitAdd(int id, Trait trait) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
@@ -183,6 +204,15 @@ namespace MauiApp1.Services {
 		}
 
 
+		public Task<SubRace> SubRaceGet(int speciesId, int id) {
+			var species = _species
+				.FirstOrDefault(f => f.Id == id);
+
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{speciesId}'.");
+
+			return Task.FromResult(species.SubRaces.FirstOrDefault(f => f.Id == id));
+		}
 		public Task<SubRace> SubRaceAdd(int id, SubRace subRace) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
