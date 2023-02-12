@@ -4,7 +4,9 @@
              x:Class="MauiApp1.DetailPage"
              Title="DetailPage">
     <ScrollView>
-        <Grid Margin="25">
+        <Grid Margin="25"
+              RowSpacing="5"
+              ColumnSpacing="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -174,7 +176,12 @@
             </HorizontalStackLayout>
             <Button
                 Text="Save Species"
-                Grid.Row="20">
+                Grid.Row="20"
+                Grid.Column="1"
+                WidthRequest="100"
+                HorizontalOptions="Start"
+                Background="green"
+                Clicked="OnSaveSpeciesClicked">
             </Button>
         </Grid>
     </ScrollView>

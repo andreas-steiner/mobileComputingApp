@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.ConflictPage"
+             Title="ConflictPage">
+    <ScrollView>
+        <Grid Margin="25"
+              RowSpacing="5"
+              ColumnSpacing="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".3*"></ColumnDefinition>
+                <ColumnDefinition Width=".35*"></ColumnDefinition>
+                <ColumnDefinition Width=".35*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label
+                Text="Phone"
+                Grid.Row="0"
+                Grid.Column="1">
+            </Label>
+            <Label
+                Text="Server"
+                Grid.Row="0"
+                Grid.Column="2">
+            </Label>
+            <Label Text="Species name"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesName"
+                    Text="{Binding SpeciesName, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Placeholder="New Species Name"
+                    VerticalOptions="Center"></Entry>
+            <Entry x:Name="SpeciesNameServer"
+                    Text="{Binding SpeciesName, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Placeholder="New Species Name"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species speed"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesSpeed"
+                    Text="{Binding SpeciesSpeed, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Placeholder = "30"
+                    VerticalOptions="Center"></Entry>
+            <Entry x:Name="SpeciesSpeedServer"
+                    Text="{Binding SpeciesSpeed, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Placeholder = "30"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species alignement"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesAlignement"
+                    Text="{Binding SpeciesAlignement, Mode=TwoWay}"	
+                    ClearButtonVisibility="Never"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Placeholder ="Neutral"
+                    VerticalOptions="Center"></Entry>
+            <Entry x:Name="SpeciesAlignementServer"
+                    Text="{Binding SpeciesAlignement, Mode=TwoWay}"	
+                    ClearButtonVisibility="Never"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Placeholder ="Neutral"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species age"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesAge"
+                    Text="{Binding SpeciesAge, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Placeholder ="75"
+                    VerticalOptions="Center"></Entry>
+            <Entry x:Name="SpeciesAgeServer"
+                    Text="{Binding SpeciesAge, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Placeholder ="75"
+                    VerticalOptions="Center"></Entry>
+            <Label Text="Species size"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+            <Entry x:Name="SpeciesSize"
+                    Text="{Binding SpeciesSize, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Placeholder ="Medium"
+                    VerticalOptions="Center"></Entry>
+            <Entry x:Name="SpeciesSizeServer"
+                    Text="{Binding SpeciesSize, Mode=TwoWay}"
+                    ClearButtonVisibility="Never"
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    Placeholder ="Medium"
+                    VerticalOptions="Center"></Entry>
+            <!-- List View fuer Lang-->
+            <Label Text="Species language"
+                    Grid.Row="6"
+                    Grid.Column="0" LineBreakMode="WordWrap"
+                    FontSize="Small"
+                    VerticalOptions="Start"></Label>
+            <ListView x:Name="LangList" Grid.Column="1" Grid.Row="6" VerticalScrollBarVisibility ="Never"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Entry
+                                    Text="{Binding Name, Mode=TwoWay}"
+                                    ClearButtonVisibility="Never"
+                                    VerticalOptions="Center">
+                                </Entry>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <HorizontalStackLayout Grid.Row="7" Grid.Column="1">
+                <Button Text ="Add Lang" WidthRequest="100"
+                        Clicked="OnAddLangClicked">
+                </Button>
+            </HorizontalStackLayout>
+            <ListView x:Name="LangListServer" Grid.Column="2" Grid.Row="6" VerticalScrollBarVisibility ="Never"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Entry
+                                    Text="{Binding Name, Mode=TwoWay}"
+                                    ClearButtonVisibility="Never"
+                                    VerticalOptions="Center">
+                                </Entry>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <HorizontalStackLayout Grid.Row="7" Grid.Column="2">
+                <Button Text ="Add Lang" WidthRequest="100"
+                        Clicked="OnAddLangClickedServer">
+                </Button>
+            </HorizontalStackLayout>
+            <!-- List View fuer Traits-->
+            <Label Text="Species traits"
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+
+            <ListView x:Name="TraitList" Grid.Column="1" Grid.Row="8" VerticalScrollBarVisibility ="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Entry
+                                    Text="{Binding Name, Mode=TwoWay}"
+                                    ClearButtonVisibility="Never"
+                                    VerticalOptions="Center">
+                                </Entry>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <HorizontalStackLayout Grid.Row="9" Grid.Column="1">
+                <Button Text ="Add Trait" WidthRequest="100"
+                        Clicked="OnAddTraitClicked">
+                </Button>
+            </HorizontalStackLayout>
+            <ListView x:Name="TraitListServer" Grid.Column="2" Grid.Row="8" VerticalScrollBarVisibility ="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Entry
+                                    Text="{Binding Name, Mode=TwoWay}"
+                                    ClearButtonVisibility="Never"
+                                    VerticalOptions="Center">
+                                </Entry>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <HorizontalStackLayout Grid.Row="9" Grid.Column="2">
+                <Button Text ="Add Trait" WidthRequest="100"
+                        Clicked="OnAddTraitClickedServer">
+                </Button>
+            </HorizontalStackLayout>
+            <!-- List View fuer Sub Races-->
+            <Label Text="Species sub races"
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    FontSize="Small"
+                    VerticalOptions="Center"></Label>
+
+            <ListView x:Name="SubList" Grid.Column="1" Grid.Row="10" VerticalScrollBarVisibility ="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Entry
+                                    Text="{Binding Name, Mode=TwoWay}"
+                                    ClearButtonVisibility="Never"
+                                    VerticalOptions="Center">
+                                </Entry>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <HorizontalStackLayout Grid.Row="11" Grid.Column="1">
+                <Button Text ="Add Sub" WidthRequest="100"
+                        Clicked="OnAddSubClicked">
+                </Button>
+            </HorizontalStackLayout>
+            <ListView x:Name="SubListServer" Grid.Column="2" Grid.Row="10" VerticalScrollBarVisibility ="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Entry
+                                    Text="{Binding Name, Mode=TwoWay}"
+                                    ClearButtonVisibility="Never"
+                                    VerticalOptions="Center">
+                                </Entry>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <HorizontalStackLayout Grid.Row="11" Grid.Column="2">
+                <Button Text ="Add Sub" WidthRequest="100"
+                        Clicked="OnAddSubClickedServer">
+                </Button>
+            </HorizontalStackLayout>
+            <Button
+                Text="Save Species"
+                Grid.Row="20"
+                Grid.Column="1"
+                WidthRequest="100"
+                HorizontalOptions="Start"
+                Background="green"
+                >
+            </Button>
+            <Button
+                Text="Save Species"
+                Grid.Row="20"
+                Grid.Column="2"
+                WidthRequest="100"
+                HorizontalOptions="Start"
+                Background="green"
+                >
+            </Button>
+            <Button
+                Text="Cancel"
+                Grid.Row="20"
+                Grid.Column="0"
+                WidthRequest="100"
+                HorizontalOptions="Start"
+                Background="red"
+                >
+            </Button>
+        </Grid>
+    </ScrollView>
+</ContentPage>

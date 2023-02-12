@@ -4,12 +4,12 @@ using System.Collections.ObjectModel;
 
 namespace MauiApp1;
 
-public partial class DetailPage : ContentPage
+public partial class ConflictPage : ContentPage
 {
     private readonly DataStore dataStore;
     private readonly Species species;
 
-    public DetailPage(DataStore dataStore, Species species, bool alsNeu)
+    public ConflictPage(DataStore dataStore, Species species, bool alsNeu)
     {
         InitializeComponent();
         this.Title = alsNeu ? "New Species" : "Edit Species";
@@ -19,18 +19,21 @@ public partial class DetailPage : ContentPage
         SpeciesAge.Text = species.Age.ToString();
         SpeciesSize.Text = species.Size;
         LangList.ItemsSource = new ObservableCollection<Lang>(species.Langs);
+        LangListServer.ItemsSource = new ObservableCollection<Lang>(species.Langs);
         TraitList.ItemsSource = new ObservableCollection<Trait>(species.Traits);
+        TraitListServer.ItemsSource = new ObservableCollection<Trait>(species.Traits);
         SubList.ItemsSource = new ObservableCollection<SubRace>(species.SubRaces);
+        SubListServer.ItemsSource = new ObservableCollection<SubRace>(species.SubRaces);
+
 
         this.dataStore = dataStore;
         this.species = species;
     }
 
-    public void OnAddLangClicked(object sender, EventArgs args) 
+    public void OnAddLangClicked(object sender, EventArgs args)
     {
         ((ObservableCollection<Lang>)LangList.ItemsSource).Add(new Lang() { Name = "new Lang" });
     }
-
     public void OnAddTraitClicked(object sender, EventArgs args)
     {
         ((ObservableCollection<Trait>)TraitList.ItemsSource).Add(new Trait() { Name = "new Trait" });
@@ -40,8 +43,16 @@ public partial class DetailPage : ContentPage
         ((ObservableCollection<SubRace>)SubList.ItemsSource).Add(new SubRace() { Name = "new Sub Race" });
     }
 
-    private async void OnSaveSpeciesClicked(object sender, EventArgs e)
+    public void OnAddLangClickedServer(object sender, EventArgs args)
     {
-        await Navigation.PushAsync(new ConflictPage(dataStore, new Species(), true));
+        ((ObservableCollection<Lang>)LangListServer.ItemsSource).Add(new Lang() { Name = "new Lang" });
+    }
+    public void OnAddTraitClickedServer(object sender, EventArgs args)
+    {
+        ((ObservableCollection<Trait>)TraitListServer.ItemsSource).Add(new Trait() { Name = "new Trait" });
+    }
+    public void OnAddSubClickedServer(object sender, EventArgs args)
+    {
+        ((ObservableCollection<SubRace>)SubListServer.ItemsSource).Add(new SubRace() { Name = "new Sub Race" });
     }
 }
