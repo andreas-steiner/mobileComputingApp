@@ -35,9 +35,9 @@ public class Species : ChangedStateModel {
 		Alignement = other.Alignement;
 		Age = other.Age;
 		Size = other.Size;
-		Langs = other.Langs;
-		Traits = other.Traits;
-		SubRaces = other.SubRaces;
+		Langs = other.Langs.Select(s => new Lang().CopyFrom(s)).ToList();
+		Traits = other.Traits.Select(s => new Trait().CopyFrom(s)).ToList();
+		SubRaces = other.SubRaces.Select(s => new SubRace().CopyFrom(s)).ToList();
 
 		return this;
 	}
@@ -64,7 +64,7 @@ public class Trait : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 
-	public Trait CopyFrom(Lang other) {
+	public Trait CopyFrom(Trait other) {
 		if (other == null)
 			return this;
 
@@ -81,7 +81,7 @@ public class SubRace : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 
-	public SubRace CopyFrom(Lang other) {
+	public SubRace CopyFrom(SubRace other) {
 		if (other == null)
 			return this;
 
