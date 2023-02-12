@@ -15,16 +15,18 @@ public class DataStoreException : Exception {
 public class DataStoreCancleException : DataStoreException {
 	public DataStoreCancleException(string message = null, Exception innerException = null) : base(message, innerException) { }
 }
+public class DataStoreConflictException : DataStoreException {
+	public DataStoreConflictException(string message = null, Exception innerException = null) : base(message, innerException) { }
+}
 
-public class DataStoreConflictException<T> : DataStoreException where T : ChangedStateModel {
-	public bool IsDeleted { get; set; }
-	public bool IsChanged { get; set; }
+public class DataStoreConflictDeletedException : DataStoreConflictException {
+	public DataStoreConflictDeletedException(string message = null, Exception innerException = null) : base(message, innerException) { }
+}
+
+public class DataStoreConflictChanedException<T> : DataStoreConflictException where T : ChangedStateModel {
+	public DataStoreConflictChanedException(T newValue, string message = null, Exception innerException = null) : base(message, innerException) {
+		ConflicObject = newValue;
+	}
 
 	public T ConflicObject { get; set; }
-
-	public static DataStoreConflictException<T> AsChanged(T newValue = null)
-		=> new DataStoreConflictException<T>() { IsDeleted = true, ConflicObject = newValue };
-
-	public static DataStoreConflictException<T> AsDeleted()
-		=> new DataStoreConflictException<T>() { IsChanged = true };
 }
