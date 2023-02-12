@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Species"
              x:Class="MauiApp1.MainPage">
     <StackLayout>
-        <ListView x:Name="list" Header="Species Overview">
+        <ListView x:Name="list" Header="Species Overview"
+                  ItemTapped="OnSpeciesTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -22,10 +24,19 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
-        <Button Text="Hallo"
-                />
+        <Grid VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button
+            Text="Add Species"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="0"
+            Grid.Column="1"
+            Clicked="OnAddClicked"/>
+        </Grid>
     </StackLayout>   
 
 </ContentPage>

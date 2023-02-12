@@ -8,15 +8,15 @@ public class ChangedStateModel {
 public class Species : ChangedStateModel {
 	public int Id { get; set; }
 
-	public string Name { get; set; } = string.Empty;
-	public int Speed { get; set; }
-	public string Alignement { get; set; } = string.Empty;
-	public int Age { get; set; }
-	public string Size { get; set; } = string.Empty;
+	public string Name { get; set; } = "new Species Name";
+	public int Speed { get; set; } = 30;
+	public string Alignement { get; set; } = "Neutral";
+	public int Age { get; set; } = 75;
+	public string Size { get; set; } = "Medium";
 
-	public List<Lang> Langs { get; set; } = new();
-	public List<Trait> Traits { get; set; } = new();
-	public List<SubRace> SubRaces { get; set; } = new();
+	public List<Lang> Langs { get; set; } = new() { new Lang() { Name = "Common" } };
+	public List<Trait> Traits { get; set; } = new() { new Trait() { Name = "new Trait" } };
+	public List<SubRace> SubRaces { get; set; } = new() { new SubRace() { Name = "Sub Race" } };
 }
 
 public class Lang : ChangedStateModel {

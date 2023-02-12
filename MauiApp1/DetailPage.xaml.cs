@@ -7,10 +7,10 @@ public partial class DetailPage : ContentPage
 {
     private readonly DataStore dataStore;
 
-    public DetailPage(DataStore dataStore, Species Species)
+    public DetailPage(DataStore dataStore, Species Species, bool alsNeu)
 	{
         InitializeComponent();
-
+        this.Title = alsNeu ? "New Species" : "Edit Species";
         SpeciesName.Text = Species.Name;
         SpeciesSpeed.Text = Species.Speed.ToString();
         SpeciesAlignement.Text = Species.Alignement;
