@@ -15,17 +15,12 @@ public class DataContext : DbContext
 
 	public DbSet<Species> Specien { get; set; }
 
-    public DbSet<AbilityScore> AbilityScores { get; set; }
-    public DbSet<StartingProficency> StartingProficencies { get; set; }
     public DbSet<Lang> Langs { get; set; }
     public DbSet<Trait> Traits { get; set; }
     public DbSet<SubRace> SubRaces { get; set; }
 
     public IQueryable<Species> SpecienIncludingAll { 
-        get => Specien
-                .Include(i => i.AbilityScores)
-                .Include(i => i.StartingProficencies)
-                .Include(i => i.Langs)
+        get => Specien.Include(i => i.Langs)
                 .Include(i => i.Traits)
                 .Include(i => i.SubRaces);
     }

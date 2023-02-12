@@ -54,11 +54,6 @@
                     Grid.Column="0"
                     FontSize="Small"
                     VerticalOptions="Center"></Label>
-            <Entry x:Name="SpeciesAbilityScores"
-                    Text="{Binding SpeciesAbilityScores, Mode=TwoWay}"			   	   
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    VerticalOptions="Center"></Entry>
             <Label Text="Species alignement"
                     Grid.Row="4"
                     Grid.Column="0"
@@ -94,11 +89,6 @@
                     Grid.Column="0"
                     FontSize="Small"
                     VerticalOptions="Center"></Label>
-            <Entry x:Name="SpeciesStartingProficenies"
-                    Text="{Binding SpeciesStartingProficenies, Mode=TwoWay}"			   	   
-                    Grid.Row="7"
-                    Grid.Column="1"
-                    VerticalOptions="Center"></Entry>
             <Label Text="Species language"
                     Grid.Row="8"
                     Grid.Column="0"
