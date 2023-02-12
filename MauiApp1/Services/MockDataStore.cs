@@ -1,14 +1,13 @@
 ﻿using Shared;
 
-namespace MauiApp1.Services
-{
-    public class MockDataStore : DataStore
-    {
+namespace MauiApp1.Services {
+	public class MockDataStore : DataStore {
 		private List<Species> _species;
 		private Random rnd = new Random();
 
 		public Task<List<Species>> AllSpecies() {
-			if (_species is null) _species = MockData.GetData();
+			if (_species is null)
+				_species = MockData.GetData();
 
 			return Task.FromResult(_species);
 		}
@@ -22,11 +21,11 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(species);
 		}
-		public Task<Species> SpeciesUpdate(Species species) {
+		public Task<Species> SpeciesUpdate(Species species, bool force) {
 			var dbSpecies = _species.FirstOrDefault(f => f.Id == species.Id);
 
 			if (dbSpecies is null)
-				return null;
+				throw DataStoreConflictException<Species>.AsDeleted();
 
 			dbSpecies.Name = species.Name;
 			dbSpecies.Size = species.Size;
@@ -38,7 +37,7 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(dbSpecies);
 		}
-		public Task SpeciesRemove(Species species) {
+		public Task SpeciesRemove(Species species, bool force) {
 			var dbSpecies = _species.FirstOrDefault(f => f.Id == species.Id);
 
 			if (dbSpecies is null)
@@ -54,9 +53,8 @@ namespace MauiApp1.Services
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			lang.Id = species.Langs.Max(m => m.Id) + 1;
 			lang.LastEdited = DateTime.Now;
@@ -66,26 +64,24 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(lang);
 		}
-		public Task<Lang> LangUpdate(int id, Lang lang) {
+		public Task<Lang> LangUpdate(int id, Lang lang, bool force) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			var dbLang = species.Langs.FirstOrDefault(f => f.Id == lang.Id);
 
-			if (dbLang is null) {
-				return null;
-			}
+			if (dbLang is null)
+				throw DataStoreConflictException<Lang>.AsDeleted();
 
-			if (rnd.Next(2) == 1)
+			if (rnd.Next(2) == 1 || !force)
 				throw DataStoreConflictException<Lang>.AsChanged(new Lang() {
-					Id= dbLang.Id,
-					LastEdited= dbLang.LastEdited.AddSeconds(1),
-					Name= dbLang.Name + " neuer Wert",
-					LastEditFrom= dbLang.LastEditFrom + "2",
+					Id = dbLang.Id,
+					LastEdited = dbLang.LastEdited.AddSeconds(1),
+					Name = dbLang.Name + " neuer Wert",
+					LastEditFrom = dbLang.LastEditFrom + "2",
 				});
 
 			dbLang.Name = lang.Name;
@@ -94,21 +90,19 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(dbLang);
 		}
-		public Task LangRemove(int id, Lang lang) {
+		public Task LangRemove(int id, Lang lang, bool force) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			var dbLang = species.Langs.FirstOrDefault(f => f.Id == lang.Id);
 
-			if (dbLang is null) {
+			if (dbLang is null)
 				return Task.CompletedTask;
-			}
 
-			if (rnd.Next(2) == 1)
+			if (rnd.Next(2) == 1 || !force)
 				throw DataStoreConflictException<Lang>.AsChanged(new Lang() {
 					Id = dbLang.Id,
 					LastEdited = dbLang.LastEdited.AddSeconds(1),
@@ -126,9 +120,8 @@ namespace MauiApp1.Services
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			trait.Id = species.Langs.Max(m => m.Id) + 1;
 			trait.LastEdited = DateTime.Now;
@@ -138,22 +131,20 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(trait);
 		}
-		public Task<Trait> TraitUpdate(int id, Trait trait) {
+		public Task<Trait> TraitUpdate(int id, Trait trait, bool force) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			var dbTrait = species.Traits.FirstOrDefault(f => f.Id == trait.Id);
 
-			if (dbTrait is null) {
-				return null;
-			}
+			if (dbTrait is null)
+				throw DataStoreConflictException<Trait>.AsDeleted();
 
-			if (rnd.Next(2) == 1)
-				throw DataStoreConflictException<Lang>.AsChanged(new Lang() {
+			if (rnd.Next(2) == 1 || !force)
+				throw DataStoreConflictException<Trait>.AsChanged(new Trait() {
 					Id = dbTrait.Id,
 					LastEdited = dbTrait.LastEdited.AddSeconds(1),
 					Name = dbTrait.Name + " neuer Wert",
@@ -166,22 +157,20 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(dbTrait);
 		}
-		public Task TraitRemove(int id, Trait trait) {
+		public Task TraitRemove(int id, Trait trait, bool force) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			var dbTrait = species.Traits.FirstOrDefault(f => f.Id == trait.Id);
 
-			if (dbTrait is null) {
+			if (dbTrait is null)
 				return Task.CompletedTask;
-			}
 
-			if (rnd.Next(2) == 1)
-				throw DataStoreConflictException<Lang>.AsChanged(new Lang() {
+			if (rnd.Next(2) == 1 || !force)
+				throw DataStoreConflictException<Trait>.AsChanged(new Trait() {
 					Id = dbTrait.Id,
 					LastEdited = dbTrait.LastEdited.AddSeconds(1),
 					Name = dbTrait.Name + " neuer Wert",
@@ -198,9 +187,8 @@ namespace MauiApp1.Services
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			subRace.Id = species.Langs.Max(m => m.Id) + 1;
 			subRace.LastEdited = DateTime.Now;
@@ -210,21 +198,19 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(subRace);
 		}
-		public Task<SubRace> SubRaceUpdate(int id, SubRace subRace) {
+		public Task<SubRace> SubRaceUpdate(int id, SubRace subRace, bool force) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			var dbSubRace = species.SubRaces.FirstOrDefault(f => f.Id == subRace.Id);
 
-			if (dbSubRace is null) {
-				return null;
-			}
+			if (dbSubRace is null)
+				throw DataStoreConflictException<SubRace>.AsDeleted();
 
-			if (rnd.Next(2) == 1)
+			if (rnd.Next(2) == 1 || !force)
 				throw DataStoreConflictException<SubRace>.AsChanged(new SubRace() {
 					Id = dbSubRace.Id,
 					LastEdited = dbSubRace.LastEdited.AddSeconds(1),
@@ -238,21 +224,19 @@ namespace MauiApp1.Services
 
 			return Task.FromResult(dbSubRace);
 		}
-		public Task SubRaceRemove(int id, SubRace subRace) {
+		public Task SubRaceRemove(int id, SubRace subRace, bool force) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
-			if (species == null) {
-				throw new Exception($"Couldn't find species with id '{id}'.");
-			}
+			if (species == null)
+				throw new DataStoreCancleException($"Couldn't find species with id '{id}'.");
 
 			var dbSubRace = species.SubRaces.FirstOrDefault(f => f.Id == subRace.Id);
 
-			if (dbSubRace is null) {
+			if (dbSubRace is null)
 				return Task.CompletedTask;
-			}
 
-			if (rnd.Next(2) == 1)
+			if (rnd.Next(2) == 1 || !force)
 				throw DataStoreConflictException<SubRace>.AsChanged(new SubRace() {
 					Id = dbSubRace.Id,
 					LastEdited = dbSubRace.LastEdited.AddSeconds(1),
