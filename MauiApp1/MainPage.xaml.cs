@@ -10,7 +10,11 @@ public partial class MainPage : ContentPage
     public MainPage(DataStore dataStore)
     {
         InitializeComponent();
-        list.ItemsSource = dataStore.AllSpecies();
+        
+        Task.Run(async () => {
+			list.ItemsSource = await dataStore.AllSpecies();
+		});
+
         this.dataStore = dataStore;
     }
     async void OnSpeciesTapped(object sender, ItemTappedEventArgs e)
