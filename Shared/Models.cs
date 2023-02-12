@@ -1,6 +1,11 @@
 ﻿namespace Shared;
 
-public class Species {
+public class ChangedStateModel {
+	public DateTime LastEdited { get; set; } = DateTime.Now;
+	public string LastEditFrom { get; set; } = "system";
+}
+
+public class Species : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 	public int Speed { get; set; }
@@ -14,27 +19,27 @@ public class Species {
 	public List<SubRace> SubRaces { get; set; } = new();
 }
 
-public class AbilityScore {
+public class AbilityScore : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 }
 
-public class StartingProficency {
+public class StartingProficency : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 }
 
-public class Lang {
+public class Lang : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 }
 
-public class Trait {
+public class Trait : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 }
 
-public class SubRace {
+public class SubRace : ChangedStateModel {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 }
