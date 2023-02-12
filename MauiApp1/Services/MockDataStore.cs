@@ -38,6 +38,15 @@ namespace MauiApp1.Services {
 			dbSpecies.LastEdited = DateTime.Now;
 			dbSpecies.LastEditFrom = "local";
 
+			if (rnd.Next(2) == 1 || !force) {
+				species = new Species().CopyFrom(dbSpecies);
+				species.LastEdited = dbSpecies.LastEdited.AddSeconds(1);
+				species.Name = dbSpecies.Name + " neuer Wert";
+				species.LastEditFrom = dbSpecies.LastEditFrom + "2";
+				
+				throw new DataStoreConflictChanedException<Species>(species);
+			}
+
 			return Task.FromResult(dbSpecies);
 		}
 		public Task SpeciesRemove(Species species, bool force = false) {
@@ -45,6 +54,15 @@ namespace MauiApp1.Services {
 
 			if (dbSpecies is null)
 				return Task.CompletedTask;
+
+			if (rnd.Next(2) == 1 || !force) {
+				species = new Species().CopyFrom(dbSpecies);
+				species.LastEdited = dbSpecies.LastEdited.AddSeconds(1);
+				species.Name = dbSpecies.Name + " neuer Wert";
+				species.LastEditFrom = dbSpecies.LastEditFrom + "2";
+
+				throw new DataStoreConflictChanedException<Species>(species);
+			}
 
 			_species.Remove(dbSpecies);
 
