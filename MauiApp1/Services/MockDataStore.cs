@@ -21,7 +21,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(species);
 		}
-		public Task<Species> SpeciesUpdate(Species species, bool force) {
+		public Task<Species> SpeciesUpdate(Species species, bool force = false) {
 			var dbSpecies = _species.FirstOrDefault(f => f.Id == species.Id);
 
 			if (dbSpecies is null)
@@ -37,7 +37,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(dbSpecies);
 		}
-		public Task SpeciesRemove(Species species, bool force) {
+		public Task SpeciesRemove(Species species, bool force = false) {
 			var dbSpecies = _species.FirstOrDefault(f => f.Id == species.Id);
 
 			if (dbSpecies is null)
@@ -64,7 +64,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(lang);
 		}
-		public Task<Lang> LangUpdate(int id, Lang lang, bool force) {
+		public Task<Lang> LangUpdate(int id, Lang lang, bool force = false) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
@@ -90,7 +90,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(dbLang);
 		}
-		public Task LangRemove(int id, Lang lang, bool force) {
+		public Task LangRemove(int id, Lang lang, bool force = false) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
@@ -131,7 +131,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(trait);
 		}
-		public Task<Trait> TraitUpdate(int id, Trait trait, bool force) {
+		public Task<Trait> TraitUpdate(int id, Trait trait, bool force = false) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
@@ -157,7 +157,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(dbTrait);
 		}
-		public Task TraitRemove(int id, Trait trait, bool force) {
+		public Task TraitRemove(int id, Trait trait, bool force = false) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
@@ -198,7 +198,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(subRace);
 		}
-		public Task<SubRace> SubRaceUpdate(int id, SubRace subRace, bool force) {
+		public Task<SubRace> SubRaceUpdate(int id, SubRace subRace, bool force = false) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
@@ -224,7 +224,7 @@ namespace MauiApp1.Services {
 
 			return Task.FromResult(dbSubRace);
 		}
-		public Task SubRaceRemove(int id, SubRace subRace, bool force) {
+		public Task SubRaceRemove(int id, SubRace subRace, bool force = false) {
 			var species = _species
 				.FirstOrDefault(f => f.Id == id);
 
