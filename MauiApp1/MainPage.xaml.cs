@@ -44,13 +44,13 @@ public partial class MainPage : ContentPage {
 	private async void DetailPage_OnDone(object sender, Species species) {
 		var detailPage = (DetailPage)sender;
 		if (detailPage.AsNew) {
-			await SpeciesSave(species);
+			await SpeciesNew(species);
 		} else {
 			await SpeciesUpdate(species);
 		}
 	}
 
-	private async Task SpeciesSave(Species species) {
+	private async Task SpeciesUpdate(Species species) {
 		try {
 			var newSpecies = await _dataStore.SpeciesUpdate(species);
 			((Species)list.SelectedItem).CopyFrom(newSpecies);
@@ -81,7 +81,7 @@ public partial class MainPage : ContentPage {
 		((Species)list.SelectedItem).CopyFrom(newSpecies);
 	}
 
-	private async Task SpeciesUpdate(Species species) {
+	private async Task SpeciesNew(Species species) {
 		var newSpecies = await _dataStore.SpeciesAdd(species);
 		_species.Add(newSpecies);
 	}
