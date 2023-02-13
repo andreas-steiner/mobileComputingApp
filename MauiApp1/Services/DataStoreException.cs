@@ -23,10 +23,10 @@ public class DataStoreConflictDeletedException : DataStoreConflictException {
 	public DataStoreConflictDeletedException(string message = null, Exception innerException = null) : base(message, innerException) { }
 }
 
-public class DataStoreConflictChangedException<T> : DataStoreConflictException where T : ChangedStateModel {
-	public DataStoreConflictChangedException(T newValue, string message = null, Exception innerException = null) : base(message, innerException) {
+public class DataStoreConflictChangedException : DataStoreConflictException {
+	public DataStoreConflictChangedException(Species newValue, string message = null, Exception innerException = null) : base(message, innerException) {
 		ConflicObject = newValue;
 	}
 
-	public T ConflicObject { get; set; }
+	public Species ConflicObject { get; set; }
 }

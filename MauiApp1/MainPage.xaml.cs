@@ -66,7 +66,7 @@ public partial class MainPage : ContentPage {
 			} else {
 				_species.Remove((Species)list.SelectedItem);
 			}
-		} catch (DataStoreConflictChangedException<Species> changed) {
+		} catch (DataStoreConflictChangedException changed) {
 			var conflictPage = new ConflictPage(species, changed.ConflicObject);
 
 			((Species)list.SelectedItem).CopyFrom(changed.ConflicObject);
@@ -91,7 +91,7 @@ public partial class MainPage : ContentPage {
 		try {
 			await _dataStore.SpeciesRemove(species);
 			_species.Remove(species);
-		} catch (DataStoreConflictChangedException<Species> deleted) {
+		} catch (DataStoreConflictChangedException deleted) {
 			var popUp = new MsgPopUp($"Species {species.Name} has change, do you still want to delete?") {
 				CanBeDismissedByTappingOutsideOfPopup = false
 			};

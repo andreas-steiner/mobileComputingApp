@@ -1,16 +1,6 @@
 ﻿namespace Shared;
 
-public class ChangedStateModel {
-	public DateTime LastEdited { get; set; } = DateTime.Now;
-	public string LastEditFrom { get; set; } = "system";
-
-	public void CopyFrom(ChangedStateModel other) {
-		LastEdited = other.LastEdited;
-		LastEditFrom = other.LastEditFrom;
-	}
-}
-
-public class Species : ChangedStateModel {
+public class Species {
 	public int Id { get; set; }
 
 	public string Name { get; set; } = string.Empty;
@@ -23,11 +13,12 @@ public class Species : ChangedStateModel {
 	public List<Trait> Traits { get; set; } = new() { new Trait() { Name = "trait 1" } };
 	public List<SubRace> SubRaces { get; set; } = new() { new SubRace() { Name = "subrace 1" } };
 
+	public DateTime LastEdited { get; set; } = DateTime.Now;
+	public string LastEditFrom { get; set; } = "system";
+
 	public Species CopyFrom(Species other) {
 		if (other == null)
 			return this;
-
-		base.CopyFrom(other);
 
 		Id = other.Id;
 		Name = other.Name;
@@ -39,11 +30,14 @@ public class Species : ChangedStateModel {
 		Traits = other.Traits.Select(s => new Trait().CopyFrom(s)).ToList();
 		SubRaces = other.SubRaces.Select(s => new SubRace().CopyFrom(s)).ToList();
 
+		LastEdited = other.LastEdited;
+		LastEditFrom = other.LastEditFrom;
+
 		return this;
 	}
 }
 
-public class Lang : ChangedStateModel {
+public class Lang {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 
@@ -51,8 +45,6 @@ public class Lang : ChangedStateModel {
 		if (other == null)
 			return this;
 
-		base.CopyFrom(other);
-
 		Id = other.Id;
 		Name = other.Name;
 
@@ -60,7 +52,7 @@ public class Lang : ChangedStateModel {
 	}
 }
 
-public class Trait : ChangedStateModel {
+public class Trait {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 
@@ -68,8 +60,6 @@ public class Trait : ChangedStateModel {
 		if (other == null)
 			return this;
 
-		base.CopyFrom(other);
-
 		Id = other.Id;
 		Name = other.Name;
 
@@ -77,15 +67,13 @@ public class Trait : ChangedStateModel {
 	}
 }
 
-public class SubRace : ChangedStateModel {
+public class SubRace {
 	public int Id { get; set; }
 	public string Name { get; set; } = string.Empty;
 
 	public SubRace CopyFrom(SubRace other) {
 		if (other == null)
 			return this;
-
-		base.CopyFrom(other);
 
 		Id = other.Id;
 		Name = other.Name;
