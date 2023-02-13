@@ -14,15 +14,17 @@ public partial class MainPage : ContentPage {
 
 	public MainPage(DataStore dataStore) {
 		InitializeComponent();
+		
+        _dataStore = dataStore;
+        Task.Run(Refresh);
+    }
 
-		Task.Run(async () => {
-			var data = await dataStore.AllSpecies();
-			_species = new ObservableCollection<Species>(data);
-			list.ItemsSource = _species;
-		});
-
-		_dataStore = dataStore;
-	}
+	public async Task Refresh()
+	{
+        var data = await _dataStore.AllSpecies();
+        _species = new ObservableCollection<Species>(data);
+        list.ItemsSource = _species;
+    }
 
 	async void OnSpeciesTapped(object sender, ItemTappedEventArgs e) {
 		var species = new Species().CopyFrom((Species)list.SelectedItem);
@@ -54,7 +56,8 @@ public partial class MainPage : ContentPage {
 		try {
 			var newSpecies = await _dataStore.SpeciesUpdate(species);
 			((Species)list.SelectedItem).CopyFrom(newSpecies);
-		} catch (DataStoreConflictDeletedException) {
+			await Refresh();
+        } catch (DataStoreConflictDeletedException) {
 			var popUp = new MsgPopUp($"Species {species.Name} has been deleted, do you want to recreate it as new?") {
 				CanBeDismissedByTappingOutsideOfPopup = false
 			};
@@ -70,7 +73,8 @@ public partial class MainPage : ContentPage {
 			var conflictPage = new ConflictPage(species, changed.ConflicObject);
 
 			((Species)list.SelectedItem).CopyFrom(changed.ConflicObject);
-			conflictPage.OnDone += ConflictPage_OneDone;
+			await Refresh();
+            conflictPage.OnDone += ConflictPage_OneDone;
 
 			await Navigation.PushAsync(conflictPage);
 		}
@@ -79,7 +83,8 @@ public partial class MainPage : ContentPage {
 	private async void ConflictPage_OneDone(object sender, Species species) {
 		var newSpecies = await _dataStore.SpeciesUpdate(species, true);
 		((Species)list.SelectedItem).CopyFrom(newSpecies);
-	}
+		await Refresh();
+    }
 
 	private async Task SpeciesNew(Species species) {
 		var newSpecies = await _dataStore.SpeciesAdd(species);
@@ -91,7 +96,9 @@ public partial class MainPage : ContentPage {
 		try {
 			await _dataStore.SpeciesRemove(species);
 			_species.Remove(species);
-		} catch (DataStoreConflictChangedException deleted) {
+            await Refresh();
+        }
+        catch (DataStoreConflictChangedException deleted) {
 			var popUp = new MsgPopUp($"Species {species.Name} has change, do you still want to delete?") {
 				CanBeDismissedByTappingOutsideOfPopup = false
 			};
@@ -100,9 +107,10 @@ public partial class MainPage : ContentPage {
 
 			if (shouldDelete) {
 				await _dataStore.SpeciesRemove(species, true);
-			} else {
-				((Species)list.SelectedItem).CopyFrom(deleted.ConflicObject);
+				_species.Remove(species);
 			}
+			
+			await Refresh();
 		}
 	}
 }

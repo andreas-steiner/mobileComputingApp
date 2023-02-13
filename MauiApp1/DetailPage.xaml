@@ -4,7 +4,8 @@
              x:Class="MauiApp1.DetailPage"
              Title="DetailPage">
     <ScrollView>
-        <Grid Margin="25"
+        <Grid x:Name="Grid"
+              Margin="25"
               RowSpacing="5"
               ColumnSpacing="5">
             <Grid.RowDefinitions>
@@ -48,6 +49,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Placeholder = "30"
+                    Keyboard="Numeric"
                     VerticalOptions="Center"></Entry>
             <Label Text="Species alignement"
                     Grid.Row="2"
@@ -72,6 +74,7 @@
                     Grid.Row="3"
                     Grid.Column="1"
                     Placeholder ="75"
+                    Keyboard="Numeric"
                     VerticalOptions="Center"></Entry>
             <Label Text="Species size"
                     Grid.Row="4"

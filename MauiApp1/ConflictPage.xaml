@@ -52,7 +52,7 @@
                     Placeholder="New Species Name"
                     VerticalOptions="Center"></Entry>
             <Entry x:Name="SpeciesNameServer"
-                    Text="{Binding SpeciesName, Mode=TwoWay}"
+                    Text="{Binding SpeciesNameServer, Mode=TwoWay}"
                     ClearButtonVisibility="Never"
                     Grid.Row="1"
                     Grid.Column="2"
@@ -71,7 +71,7 @@
                     Placeholder = "30"
                     VerticalOptions="Center"></Entry>
             <Entry x:Name="SpeciesSpeedServer"
-                    Text="{Binding SpeciesSpeed, Mode=TwoWay}"
+                    Text="{Binding SpeciesSpeedServer, Mode=TwoWay}"
                     ClearButtonVisibility="Never"
                     Grid.Row="2"
                     Grid.Column="2"
@@ -90,7 +90,7 @@
                     Placeholder ="Neutral"
                     VerticalOptions="Center"></Entry>
             <Entry x:Name="SpeciesAlignementServer"
-                    Text="{Binding SpeciesAlignement, Mode=TwoWay}"	
+                    Text="{Binding SpeciesAlignementServer, Mode=TwoWay}"	
                     ClearButtonVisibility="Never"
                     Grid.Row="3"
                     Grid.Column="2"
@@ -109,7 +109,7 @@
                     Placeholder ="75"
                     VerticalOptions="Center"></Entry>
             <Entry x:Name="SpeciesAgeServer"
-                    Text="{Binding SpeciesAge, Mode=TwoWay}"
+                    Text="{Binding SpeciesAgeServer, Mode=TwoWay}"
                     ClearButtonVisibility="Never"
                     Grid.Row="4"
                     Grid.Column="2"
@@ -128,7 +128,7 @@
                     Placeholder ="Medium"
                     VerticalOptions="Center"></Entry>
             <Entry x:Name="SpeciesSizeServer"
-                    Text="{Binding SpeciesSize, Mode=TwoWay}"
+                    Text="{Binding SpeciesSizeServer, Mode=TwoWay}"
                     ClearButtonVisibility="Never"
                     Grid.Row="5"
                     Grid.Column="2"
@@ -301,6 +301,7 @@
                 WidthRequest="100"
                 HorizontalOptions="Start"
                 Background="green"
+                Clicked="OnSavePhoneClicked"
                 >
             </Button>
             <Button
@@ -310,6 +311,7 @@
                 WidthRequest="100"
                 HorizontalOptions="Start"
                 Background="green"
+                Clicked="OnSaveServerClicked"
                 >
             </Button>
             <Button
@@ -319,6 +321,7 @@
                 WidthRequest="100"
                 HorizontalOptions="Start"
                 Background="red"
+                Clicked="OnCancelClicked"
                 >
             </Button>
         </Grid>
