@@ -18,7 +18,11 @@ public partial class ConflictPage : ContentPage
     {
         InitializeComponent();
 
-        SpeciesName.Text = species.Name;
+        this.species.Id = species.Id;
+        this.species.LastEdited = species.LastEdited;
+        this.species.LastEditFrom = server.LastEditFrom;
+
+		SpeciesName.Text = species.Name;
         SpeciesSpeed.Text = species.Speed.ToString();
         SpeciesAlignement.Text = species.Alignement;
         SpeciesAge.Text = species.Age.ToString();
