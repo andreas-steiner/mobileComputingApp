@@ -7,7 +7,6 @@ namespace Server;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class SpeciesController : ControllerBase {
 	private readonly DataContext _dataContext;
 
@@ -34,7 +33,7 @@ public class SpeciesController : ControllerBase {
 	public ActionResult<Species> Post([FromBody] Species species) {
 		species.Id = 0;
 		species.LastEdited = DateTime.Now;
-		species.LastEditFrom = User.Claims.First(f => f.Type == "nickname").Value;
+		species.LastEditFrom = GetUserName();
 		species.Langs.ForEach(f => f.Id = 0);
 		species.Traits.ForEach(f => f.Id = 0);
 		species.SubRaces.ForEach(f => f.Id = 0);
@@ -59,7 +58,7 @@ public class SpeciesController : ControllerBase {
 			return StatusCode(StatusCodes.Status409Conflict, dbSpecies);
 
 		var modifyDatetime = DateTime.Now;
-		var user = User.Claims.First(f => f.Type == "nickname").Value;
+		var user = GetUserName();
 
 		dbSpecies.Name = species.Name;
 		dbSpecies.Size = species.Size;
@@ -135,4 +134,7 @@ public class SpeciesController : ControllerBase {
 
 		return NoContent();
 	}
+
+	private string GetUserName()
+		=> User.Claims.FirstOrDefault(f => f.Type == "nickname")?.Value ?? "no_user";
 }
