@@ -9,9 +9,11 @@ namespace Server;
 [ApiController]
 public class SpeciesController : ControllerBase {
 	private readonly DataContext _dataContext;
+	private readonly ILogger<SpeciesController> _logger;
 
-	public SpeciesController(DataContext dataContext) {
+	public SpeciesController(DataContext dataContext, ILogger<SpeciesController> logger) {
 		_dataContext = dataContext;
+		_logger = logger;
 	}
 
 	[HttpGet]
@@ -53,6 +55,7 @@ public class SpeciesController : ControllerBase {
 		}
 
 		var force = Request.Headers.Any(w => w.Key == "Force");
+		_logger.LogInformation("With Force: {@0}", force);
 
 		if (dbSpecies.LastEdited != species.LastEdited && !force)
 			return StatusCode(StatusCodes.Status409Conflict, dbSpecies);
@@ -125,6 +128,7 @@ public class SpeciesController : ControllerBase {
 		}
 
 		var force = Request.Headers.Any(w => w.Key == "Force");
+		_logger.LogInformation("With Force: {@0}", force);
 
 		if (dbSpecies.LastEdited != lastEdited && !force)
 			return StatusCode(StatusCodes.Status409Conflict, dbSpecies);
