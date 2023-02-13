@@ -56,7 +56,7 @@ public class SpeciesController : ControllerBase {
 
 		var user = GetUserName();
 		var force = Request.Headers.Any(w => w.Key == "Force");
-		_logger.LogInformation("{@0}ith Force: {@1}", user, force);
+		_logger.LogInformation("{@0} with Force: {@1}", user, force);
 
 		if (dbSpecies.LastEdited != species.LastEdited && !force)
 			return StatusCode(StatusCodes.Status409Conflict, dbSpecies);
