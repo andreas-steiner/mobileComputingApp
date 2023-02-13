@@ -54,14 +54,14 @@ public class SpeciesController : ControllerBase {
 			return NotFound();
 		}
 
+		var user = GetUserName();
 		var force = Request.Headers.Any(w => w.Key == "Force");
-		_logger.LogInformation("With Force: {@0}", force);
+		_logger.LogInformation("{@0}ith Force: {@1}", user, force);
 
 		if (dbSpecies.LastEdited != species.LastEdited && !force)
 			return StatusCode(StatusCodes.Status409Conflict, dbSpecies);
 
 		var modifyDatetime = DateTime.Now;
-		var user = GetUserName();
 
 		dbSpecies.Name = species.Name;
 		dbSpecies.Size = species.Size;
