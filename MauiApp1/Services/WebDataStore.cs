@@ -8,7 +8,7 @@ public class WebDataStore : DataStore {
 
 	public WebDataStore(HttpClient http) {
 		_http = http;
-		_http.BaseAddress = new Uri("https://mc.schertmi.net/api/Species");
+		_http.BaseAddress = new Uri("https://mc.schertmi.net/api/Species/");
 	}
 
 	public Task<List<Species>> AllSpecies()
@@ -55,7 +55,7 @@ public class WebDataStore : DataStore {
 			_http.DefaultRequestHeaders.Add("Force", "");
 		}
 
-		var time = species.LastEdited.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
+		var time = species.LastEdited.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffff'Z'");
 		var resp = await _http.DeleteAsync($"{species.Id}?lastEdited={time}");
 
 		if (force) {
