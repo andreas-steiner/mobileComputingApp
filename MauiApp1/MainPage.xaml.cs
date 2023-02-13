@@ -67,7 +67,7 @@ public partial class MainPage : ContentPage {
 				_species.Remove((Species)list.SelectedItem);
 			}
 		} catch (DataStoreConflictChangedException<Species> changed) {
-			var conflictPage = new ConflictPage((Species)list.SelectedItem, changed.ConflicObject);
+			var conflictPage = new ConflictPage(species, changed.ConflicObject);
 
 			((Species)list.SelectedItem).CopyFrom(changed.ConflicObject);
 			conflictPage.OnDone += ConflictPage_OneDone;
