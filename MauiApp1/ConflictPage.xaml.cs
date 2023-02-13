@@ -6,12 +6,13 @@ namespace MauiApp1;
 
 public partial class ConflictPage : ContentPage
 {
+    public Species Species { get; private set; }
     private readonly Species species;
 
-    public ConflictPage(Species species, bool alsNeu)
+    public ConflictPage(Species species, Species server)
     {
         InitializeComponent();
-        this.Title = alsNeu ? "New Species" : "Edit Species";
+
         SpeciesName.Text = species.Name;
         SpeciesSpeed.Text = species.Speed.ToString();
         SpeciesAlignement.Text = species.Alignement;
@@ -52,4 +53,6 @@ public partial class ConflictPage : ContentPage
     {
         ((ObservableCollection<SubRace>)SubListServer.ItemsSource).Add(new SubRace() { Name = "new Sub Race" });
     }
+
+	public event EventHandler<Species> OnDone;
 }

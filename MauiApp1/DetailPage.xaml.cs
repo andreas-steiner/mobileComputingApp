@@ -1,4 +1,3 @@
-using MauiApp1.Services;
 using Shared;
 using System.Collections.ObjectModel;
 
@@ -6,23 +5,17 @@ namespace MauiApp1;
 
 public partial class DetailPage : ContentPage
 {
-    private readonly Species _old;
     public Species Species { get; private set; }
+    public bool AsNew { get; private set; }
 
-    public DetailPage(Species species, bool alsNeu)
+    public DetailPage(Species species, bool asNew)
     {
         InitializeComponent();
+        AsNew = asNew;
 
-        _old = species;
-
-        Title = alsNeu ? "New Species" : "Edit Species";
-
-        if (!alsNeu) {
-			species = new Species().CopyFrom(species);
-
-		}
-
-        SpeciesName.Text = species.Name;
+        Title = asNew ? "New Species" : "Edit Species";
+		
+		SpeciesName.Text = species.Name;
         SpeciesSpeed.Text = species.Speed.ToString();
         SpeciesAlignement.Text = species.Alignement;
         SpeciesAge.Text = species.Age.ToString();
@@ -55,6 +48,8 @@ public partial class DetailPage : ContentPage
 
     private async void OnSaveSpeciesClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ConflictPage(new Species(), true));
-    }
+        //await Navigation.PushAsync(new ConflictPage(new Species(), true));
+	}
+
+    public event EventHandler<Species> OnDone;
 }

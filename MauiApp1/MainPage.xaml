@@ -24,7 +24,7 @@
 
                             <Button Grid.Column="2"
                                     Text="Remove"
-                                    Clicked="Button_Clicked"/>
+                                    Clicked="BtnDelete_Clicked"/>
 
                         </Grid>
                     </ViewCell>
