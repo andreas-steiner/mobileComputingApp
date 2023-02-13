@@ -24,7 +24,9 @@
 
                             <Button Grid.Column="2"
                                     Text="Remove"
-                                    Clicked="BtnDelete_Clicked"/>
+                                    Clicked="BtnDelete_Clicked"
+                                    MaximumHeightRequest="35"
+                                    VerticalOptions="StartAndExpand"/>
 
                         </Grid>
                     </ViewCell>
