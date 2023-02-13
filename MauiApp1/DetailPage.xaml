@@ -56,13 +56,14 @@
                     Grid.Column="0"
                     FontSize="Small"
                     VerticalOptions="Center"></Label>
-            <Entry x:Name="SpeciesAlignement"
+            <!-- Multiline Field fuer Alignement-->
+            <Editor x:Name="SpeciesAlignement"
                     Text="{Binding SpeciesAlignement, Mode=TwoWay}"	
-                    ClearButtonVisibility="Never"
+                    AutoSize="TextChanges"
                     Grid.Row="2"
                     Grid.Column="1"
                     Placeholder ="Neutral"
-                    VerticalOptions="Center"></Entry>
+                    VerticalOptions="Center"></Editor>
             <Label Text="Species age"
                     Grid.Row="3"
                     Grid.Column="0"
@@ -102,11 +103,23 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
                                 <Entry
                                     Text="{Binding Name, Mode=TwoWay}"
                                     ClearButtonVisibility="Never"
                                     VerticalOptions="Center">
                                 </Entry>
+                                <Button 
+                                    Text ="X" 
+                                    FontSize="Small"
+                                    Grid.Column="1"
+                                    Clicked="OnRemoveLangClicked"
+                                    HorizontalOptions="End"
+                                    Background="red">
+                                </Button>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -114,6 +127,7 @@
             </ListView>
             <HorizontalStackLayout Grid.Row="6" Grid.Column="2">
                 <Button Text ="Add Lang" WidthRequest="100"
+                        Grid.Column="1"
                         Clicked="OnAddLangClicked">
                 </Button>
             </HorizontalStackLayout>
@@ -132,11 +146,23 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
                                 <Entry
                                     Text="{Binding Name, Mode=TwoWay}"
                                     ClearButtonVisibility="Never"
                                     VerticalOptions="Center">
                                 </Entry>
+                                <Button 
+                                    Text ="X" 
+                                    FontSize="Small"
+                                    Grid.Column="1"
+                                    Clicked="OnRemoveTraitClicked"
+                                    HorizontalOptions="End"
+                                    Background="red">
+                                </Button>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -162,11 +188,23 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
                                 <Entry
                                     Text="{Binding Name, Mode=TwoWay}"
                                     ClearButtonVisibility="Never"
                                     VerticalOptions="Center">
                                 </Entry>
+                                <Button 
+                                    Text ="X" 
+                                    FontSize="Small"
+                                    Grid.Column="1"
+                                    Clicked="OnRemoveSubClicked"
+                                    HorizontalOptions="End"
+                                    Background="red">
+                                </Button>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

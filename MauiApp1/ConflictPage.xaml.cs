@@ -6,8 +6,7 @@ namespace MauiApp1;
 
 public partial class ConflictPage : ContentPage
 {
-    public Species Species { get; private set; }
-    private readonly Species species;
+    private readonly Species species = new Species();
     public ObservableCollection<Lang> LangListe { get; set; }
     public ObservableCollection<Trait> TraitListe { get; set; }
     public ObservableCollection<SubRace> SubListe { get; set; }
@@ -25,6 +24,12 @@ public partial class ConflictPage : ContentPage
         SpeciesAge.Text = species.Age.ToString();
         SpeciesSize.Text = species.Size;
 
+        SpeciesNameServer.Text = server.Name;
+        SpeciesSpeedServer.Text = server.Speed.ToString();
+        SpeciesAlignementServer.Text = server.Alignement;
+        SpeciesAgeServer.Text = server.Age.ToString();
+        SpeciesSizeServer.Text = server.Size;
+
         LangListe = new ObservableCollection<Lang>(species.Langs);
         LangList.ItemsSource = LangListe;
         TraitListe = new ObservableCollection<Trait>(species.Traits);
@@ -32,14 +37,12 @@ public partial class ConflictPage : ContentPage
         SubListe = new ObservableCollection<SubRace>(species.SubRaces);
         SubList.ItemsSource = SubListe;
 
-        LangListeServer = new ObservableCollection<Lang>(species.Langs);
+        LangListeServer = new ObservableCollection<Lang>(server.Langs);
         LangListServer.ItemsSource = LangListeServer;
-        TraitListeServer = new ObservableCollection<Trait>(species.Traits);
+        TraitListeServer = new ObservableCollection<Trait>(server.Traits);
         TraitListServer.ItemsSource = TraitListeServer;
-        SubListeServer = new ObservableCollection<SubRace>(species.SubRaces);
+        SubListeServer = new ObservableCollection<SubRace>(server.SubRaces);
         SubListServer.ItemsSource = SubListeServer;
-
-        this.species = species;
     }
 
     public void OnAddLangClicked(object sender, EventArgs args)
@@ -75,41 +78,72 @@ public partial class ConflictPage : ContentPage
 
     private async void OnSavePhoneClicked(object sender, EventArgs e)
     {
-        Species.Name = SpeciesName.Text;
-        Species.Speed = Int32.Parse(SpeciesSpeed.Text);
-        Species.Alignement = SpeciesAlignement.Text;
-        Species.Age = Int32.Parse(SpeciesAge.Text);
-        Species.Size = SpeciesSize.Text;
-        Species.Langs.Clear();
-        Species.Langs.AddRange(LangListe);
-        Species.Traits.Clear();
-        Species.Traits.AddRange(TraitListe);
-        Species.SubRaces.Clear();
-        Species.SubRaces.AddRange(SubListe);
+        species.Name = SpeciesName.Text;
+        species.Speed = Int32.Parse(SpeciesSpeed.Text);
+        species.Alignement = SpeciesAlignement.Text;
+        species.Age = Int32.Parse(SpeciesAge.Text);
+        species.Size = SpeciesSize.Text;
+        species.Langs.Clear();
+        species.Langs.AddRange(LangListe);
+        species.Traits.Clear();
+        species.Traits.AddRange(TraitListe);
+        species.SubRaces.Clear();
+        species.SubRaces.AddRange(SubListe);
 
         await DisplayAlert("Success", "Species saved with phone state", "Done");
-        OnDone.Invoke(this, Species);
+        OnDone.Invoke(this, species);
         await Navigation.PopToRootAsync();
     }
 
     private async void OnSaveServerClicked(object sender, EventArgs e)
     {
-        Species.Name = SpeciesNameServer.Text;
-        Species.Speed = Int32.Parse(SpeciesSpeedServer.Text);
-        Species.Alignement = SpeciesAlignementServer.Text;
-        Species.Age = Int32.Parse(SpeciesAgeServer.Text);
-        Species.Size = SpeciesSizeServer.Text;
-        Species.Langs.Clear();
-        Species.Langs.AddRange(LangListeServer);
-        Species.Traits.Clear();
-        Species.Traits.AddRange(TraitListeServer);
-        Species.SubRaces.Clear();
-        Species.SubRaces.AddRange(SubListeServer);
+        species.Name = SpeciesNameServer.Text;
+        species.Speed = Int32.Parse(SpeciesSpeedServer.Text);
+        species.Alignement = SpeciesAlignementServer.Text;
+        species.Age = Int32.Parse(SpeciesAgeServer.Text);
+        species.Size = SpeciesSizeServer.Text;
+        species.Langs.Clear();
+        species.Langs.AddRange(LangListeServer);
+        species.Traits.Clear();
+        species.Traits.AddRange(TraitListeServer);
+        species.SubRaces.Clear();
+        species.SubRaces.AddRange(SubListeServer);
 
         await DisplayAlert("Success", "Species saved with server state", "Done");
-        OnDone.Invoke(this, Species);
+        OnDone.Invoke(this, species);
         await Navigation.PopToRootAsync();
     }
 
     public event EventHandler<Species> OnDone;
+
+    private void OnRemoveLangClicked(object sender, EventArgs e)
+    {
+        var lang = (Lang)((Element)sender).Parent.Parent.BindingContext;
+        LangListe.Remove(lang);
+    }
+    private void OnRemoveTraitClicked(object sender, EventArgs e)
+    {
+        var trait = (Trait)((Element)sender).Parent.Parent.BindingContext;
+        TraitListe.Remove(trait);
+    }
+    private void OnRemoveSubClicked(object sender, EventArgs e)
+    {
+        var sub = (SubRace)((Element)sender).Parent.Parent.BindingContext;
+        SubListe.Remove(sub);
+    }
+    private void OnRemoveLangServerClicked(object sender, EventArgs e)
+    {
+        var langServer = (Lang)((Element)sender).Parent.Parent.BindingContext;
+        LangListeServer.Remove(langServer);
+    }
+    private void OnRemoveTraitServerClicked(object sender, EventArgs e)
+    {
+        var traitServer = (Trait)((Element)sender).Parent.Parent.BindingContext;
+        TraitListeServer.Remove(traitServer);
+    }
+    private void OnRemoveSubServerClicked(object sender, EventArgs e)
+    {
+        var subServer = (SubRace)((Element)sender).Parent.Parent.BindingContext;
+        SubListeServer.Remove(subServer);
+    }
 }

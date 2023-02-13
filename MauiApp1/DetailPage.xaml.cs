@@ -75,4 +75,20 @@ public partial class DetailPage : ContentPage
     }
 
     public event EventHandler<Species> OnDone;
+
+    private void OnRemoveLangClicked(object sender, EventArgs e)
+    {
+        var lang = (Lang)((Element)sender).Parent.Parent.BindingContext;
+        LangListe.Remove(lang);
+    }
+    private void OnRemoveTraitClicked(object sender, EventArgs e)
+    {
+        var trait = (Trait)((Element)sender).Parent.Parent.BindingContext;
+        TraitListe.Remove(trait);
+    }
+    private void OnRemoveSubClicked(object sender, EventArgs e)
+    {
+        var sub = (SubRace)((Element)sender).Parent.Parent.BindingContext;
+        SubListe.Remove(sub);
+    }
 }

@@ -31,18 +31,30 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Grid VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+        <Grid  Padding="10"              
+               RowSpacing="5"
+               ColumnSpacing="5" 
+               VerticalOptions="Start" 
+               HorizontalOptions="Fill">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Button
             Text="Add Species"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Grid.Row="0"
-            Grid.Column="1"
+            Grid.Column="0"
             Clicked="OnAddClicked"/>
+            <Button
+            Text="Refresh"
+            Grid.Column="1"
+            Clicked="OnRefreshClicked">
+            </Button>
         </Grid>
     </StackLayout>
-
 </ContentPage>

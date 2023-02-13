@@ -113,4 +113,9 @@ public partial class MainPage : ContentPage {
 			await Refresh();
 		}
 	}
+
+    private async void OnRefreshClicked(object sender, EventArgs e)
+    {
+		await Refresh();
+    }
 }
