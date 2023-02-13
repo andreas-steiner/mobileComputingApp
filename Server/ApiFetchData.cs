@@ -30,8 +30,8 @@ public static class ApiFetchData {
 				Speed = (int)raceInfo.speed,
 				Age = 10,
 				Alignement = raceInfo.alignment,
-				Langs = ((IEnumerable<dynamic>)raceInfo.languages).Select(s => new Lang() { LastEditFrom = "system", Name = s.name }).ToList(),
-				SubRaces = ((IEnumerable<dynamic>)raceInfo.subraces).Select(s => new SubRace() { LastEditFrom = "system", Name = s.name }).ToList(),
+				Langs = ((IEnumerable<dynamic>)raceInfo.languages).Select(s => new Lang() { Name = s.name }).ToList(),
+				SubRaces = ((IEnumerable<dynamic>)raceInfo.subraces).Select(s => new SubRace() { Name = s.name }).ToList(),
 				LastEditFrom = "system"
 			};
 
