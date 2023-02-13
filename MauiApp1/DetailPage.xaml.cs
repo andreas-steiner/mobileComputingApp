@@ -47,7 +47,9 @@ public partial class DetailPage : ContentPage
         ((ObservableCollection<SubRace>)SubList.ItemsSource).Add(new SubRace() { Name = "new Sub Race" });
     }
 
-    public static DetailPage CreateNew() => new DetailPage(new Species(), true);
+    public static DetailPage CreateNew() => new DetailPage(new Species() {
+            Langs = new() { new Lang() { Name = "Common" } }
+        }, true);
 
 	public static DetailPage Edit(Species species) => new DetailPage(species, false);
 

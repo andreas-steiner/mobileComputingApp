@@ -9,9 +9,9 @@ public class Species {
 	public int Age { get; set; }
 	public string Size { get; set; } = string.Empty;
 
-	public List<Lang> Langs { get; set; } = new() { new Lang() { Name = "Common" } };
-	public List<Trait> Traits { get; set; } = new() { new Trait() { Name = "trait 1" } };
-	public List<SubRace> SubRaces { get; set; } = new() { new SubRace() { Name = "subrace 1" } };
+	public List<Lang> Langs { get; set; } = new();
+	public List<Trait> Traits { get; set; } = new();
+	public List<SubRace> SubRaces { get; set; } = new();
 
 	public DateTime LastEdited { get; set; } = DateTime.Now;
 	public string LastEditFrom { get; set; } = "system";
@@ -26,8 +26,11 @@ public class Species {
 		Alignement = other.Alignement;
 		Age = other.Age;
 		Size = other.Size;
+		Langs.Clear();
 		Langs = other.Langs.Select(s => new Lang().CopyFrom(s)).ToList();
+		Traits.Clear();
 		Traits = other.Traits.Select(s => new Trait().CopyFrom(s)).ToList();
+		SubRaces.Clear();
 		SubRaces = other.SubRaces.Select(s => new SubRace().CopyFrom(s)).ToList();
 
 		LastEdited = other.LastEdited;
