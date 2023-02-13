@@ -40,7 +40,7 @@ namespace MauiApp1.Services {
 			dbSpecies.LastEdited = DateTime.Now;
 			dbSpecies.LastEditFrom = "local";
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force) {
+			if ((_enableRnd && rnd.Next(2) == 1) && !force) {
 				species = new Species().CopyFrom(dbSpecies);
 				species.LastEdited = dbSpecies.LastEdited.AddSeconds(1);
 				species.Name = dbSpecies.Name + " neuer Wert";
@@ -57,7 +57,7 @@ namespace MauiApp1.Services {
 			if (dbSpecies is null)
 				return Task.CompletedTask;
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force) {
+			if ((_enableRnd && rnd.Next(2) == 1) && !force) {
 				species = new Species().CopyFrom(dbSpecies);
 				species.LastEdited = dbSpecies.LastEdited.AddSeconds(1);
 				species.Name = dbSpecies.Name + " neuer Wert";
@@ -108,7 +108,7 @@ namespace MauiApp1.Services {
 			if (dbLang is null)
 				throw new DataStoreConflictDeletedException();
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force)
+			if ((_enableRnd && rnd.Next(2) == 1) && !force)
 				throw new DataStoreConflictChangedException<Lang>(new Lang() {
 					Id = dbLang.Id,
 					LastEdited = dbLang.LastEdited.AddSeconds(1),
@@ -134,7 +134,7 @@ namespace MauiApp1.Services {
 			if (dbLang is null)
 				return Task.CompletedTask;
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force)
+			if ((_enableRnd && rnd.Next(2) == 1) && !force)
 				throw new DataStoreConflictChangedException<Lang>(new Lang() {
 					Id = dbLang.Id,
 					LastEdited = dbLang.LastEdited.AddSeconds(1),
@@ -184,7 +184,7 @@ namespace MauiApp1.Services {
 			if (dbTrait is null)
 				throw new DataStoreConflictDeletedException();
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force)
+			if ((_enableRnd && rnd.Next(2) == 1) && !force)
 				throw new DataStoreConflictChangedException<Trait>(new Trait() {
 					Id = dbTrait.Id,
 					LastEdited = dbTrait.LastEdited.AddSeconds(1),
@@ -210,7 +210,7 @@ namespace MauiApp1.Services {
 			if (dbTrait is null)
 				return Task.CompletedTask;
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force)
+			if ((_enableRnd && rnd.Next(2) == 1) && !force)
 				throw new DataStoreConflictChangedException<Trait>(new Trait() {
 					Id = dbTrait.Id,
 					LastEdited = dbTrait.LastEdited.AddSeconds(1),
@@ -260,7 +260,7 @@ namespace MauiApp1.Services {
 			if (dbSubRace is null)
 				throw new DataStoreConflictDeletedException();
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force)
+			if ((_enableRnd && rnd.Next(2) == 1) && !force)
 				throw new DataStoreConflictChangedException<SubRace>(new SubRace() {
 					Id = dbSubRace.Id,
 					LastEdited = dbSubRace.LastEdited.AddSeconds(1),
@@ -286,7 +286,7 @@ namespace MauiApp1.Services {
 			if (dbSubRace is null)
 				return Task.CompletedTask;
 
-			if ((_enableRnd && rnd.Next(2) == 1) || !force)
+			if ((_enableRnd && rnd.Next(2) == 1) && !force)
 				throw new DataStoreConflictChangedException<SubRace>(new SubRace() {
 					Id = dbSubRace.Id,
 					LastEdited = dbSubRace.LastEdited.AddSeconds(1),
