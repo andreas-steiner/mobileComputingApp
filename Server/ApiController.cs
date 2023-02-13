@@ -117,9 +117,9 @@ public class SpeciesController : ControllerBase {
 		return Ok(dbSpecies);
 	}
 
-	[HttpDelete]
-	public ActionResult Delete([FromBody] Species species) {
-		var dbSpecies = _dataContext.SpecienIncludingAll.FirstOrDefault(f => f.Id == species.Id);
+	[HttpDelete("{id:int}")]
+	public ActionResult Delete(int id, DateTime lastEdited) {
+		var dbSpecies = _dataContext.SpecienIncludingAll.FirstOrDefault(f => f.Id == id);
 
 		if (dbSpecies is null) {
 			return NoContent();
@@ -127,7 +127,7 @@ public class SpeciesController : ControllerBase {
 
 		var force = Request.Headers.Any(w => w.Key == "Force");
 
-		if (dbSpecies.LastEdited != species.LastEdited && !force)
+		if (dbSpecies.LastEdited != lastEdited && !force)
 			return StatusCode(StatusCodes.Status409Conflict, dbSpecies);
 
 		_dataContext.Remove(dbSpecies);

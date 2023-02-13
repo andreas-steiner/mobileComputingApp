@@ -12,9 +12,6 @@ public class DataStoreException : Exception {
 	public DataStoreException(string message = null, Exception innerException = null) : base(message, innerException) {  }
 }
 
-public class DataStoreCancleException : DataStoreException {
-	public DataStoreCancleException(string message = null, Exception innerException = null) : base(message, innerException) { }
-}
 public class DataStoreConflictException : DataStoreException {
 	public DataStoreConflictException(string message = null, Exception innerException = null) : base(message, innerException) { }
 }
