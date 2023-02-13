@@ -6,10 +6,9 @@ namespace MauiApp1;
 
 public partial class ConflictPage : ContentPage
 {
-    private readonly DataStore dataStore;
     private readonly Species species;
 
-    public ConflictPage(DataStore dataStore, Species species, bool alsNeu)
+    public ConflictPage(Species species, bool alsNeu)
     {
         InitializeComponent();
         this.Title = alsNeu ? "New Species" : "Edit Species";
@@ -25,8 +24,6 @@ public partial class ConflictPage : ContentPage
         SubList.ItemsSource = new ObservableCollection<SubRace>(species.SubRaces);
         SubListServer.ItemsSource = new ObservableCollection<SubRace>(species.SubRaces);
 
-
-        this.dataStore = dataStore;
         this.species = species;
     }
 

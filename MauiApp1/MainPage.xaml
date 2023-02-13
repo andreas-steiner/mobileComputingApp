@@ -15,11 +15,17 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.RowSpan="2"
-                           Text="{Binding Name}"/>
+                            <Label Text="{Binding Name}"
+                                   FontSize="Medium"/>
+
+                            <Button Grid.Column="2"
+                                    Text="Remove"
+                                    Clicked="Button_Clicked"/>
+
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
@@ -37,6 +43,6 @@
             Grid.Column="1"
             Clicked="OnAddClicked"/>
         </Grid>
-    </StackLayout>   
+    </StackLayout>
 
 </ContentPage>
