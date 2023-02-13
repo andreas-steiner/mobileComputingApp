@@ -35,6 +35,9 @@ public class SpeciesController : ControllerBase {
 		species.Id = 0;
 		species.LastEdited = DateTime.Now;
 		species.LastEditFrom = User.Claims.First(f => f.Type == "nickname").Value;
+		species.Langs.ForEach(f => f.Id = 0);
+		species.Traits.ForEach(f => f.Id = 0);
+		species.SubRaces.ForEach(f => f.Id = 0);
 
 		_dataContext.Add(species);
 		_dataContext.SaveChanges();
@@ -76,6 +79,7 @@ public class SpeciesController : ControllerBase {
 			lang.Name = newLang.Name;
 		}
 		var newLangs = species.Langs.Where(w => !dbSpecies.Langs.Any(a => a.Id == w.Id)).ToList();
+		newLangs.ForEach(f => f.Id = 0);
 		dbSpecies.Langs.AddRange(newLangs);
 
 
@@ -89,6 +93,7 @@ public class SpeciesController : ControllerBase {
 			trait.Name = newTrait.Name;
 		}
 		var newTraits = species.Traits.Where(w => !dbSpecies.Traits.Any(a => a.Id == w.Id)).ToList();
+		newTraits.ForEach(f => f.Id = 0);
 		dbSpecies.Traits.AddRange(newTraits);
 
 
@@ -102,6 +107,7 @@ public class SpeciesController : ControllerBase {
 			subRace.Name = newSubRace.Name;
 		}
 		var newSubRaces = species.SubRaces.Where(w => !dbSpecies.SubRaces.Any(a => a.Id == w.Id)).ToList();
+		newSubRaces.ForEach(f => f.Id = 0);
 		dbSpecies.SubRaces.AddRange(newSubRaces);
 
 
