@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.IO;
+using System.IO.Enumeration;
 
 namespace MauiApp1.Services;
 public class OfflineSavedDataStore : DataStore {
@@ -14,15 +17,24 @@ public class OfflineSavedDataStore : DataStore {
 	}
 
 	public Task<List<Species>> AllSpecies() {
-		try {
+        var path = FileSystem.Current.AppDataDirectory;
+        string fileName = "OfflineData";
+        var fullPath = Path.Combine(path, fileName);
+        try {
 			_dataStore.AllSpecies();
+            var serializedData = JsonSerializer.Serialize(_dataStore.AllSpecies());
+            File.WriteAllText(fullPath, serializedData);
 
 		} catch (DataStoreException) {
 			// Exception vom server
 			throw;
 		} catch (Exception) {
-			// Excepiton wenn internet nicht geht
-			return SecureStorage.Default.GetAsync
+            // Excepiton wenn internet nicht geht
+			// TODO
+			// Retrieve Data from local storage
+            var rawData = File.ReadAllText(fullPath);
+			List<Species> SpeciesOffline = JsonSerializer.Deserialize<List<Species>>(rawData);
+			return null; //return read Data
 			throw;
 		}
 
