@@ -7,6 +7,7 @@ namespace Server;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class SpeciesController : ControllerBase {
 	private readonly DataContext _dataContext;
 	private readonly ILogger<SpeciesController> _logger;
