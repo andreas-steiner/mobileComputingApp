@@ -8,21 +8,26 @@ using System.Threading.Channels;
 namespace MauiApp1;
 
 public partial class MainPage : ContentPage {
-	private readonly DataStore _dataStore;
+	public DataStore DataStore { get; private set; }
 	private ObservableCollection<Species> _species;
 
 
 	public MainPage(DataStore dataStore) {
 		InitializeComponent();
 		
-        _dataStore = dataStore;
-        Task.Run(Refresh);
+        DataStore = dataStore;
     }
+
+	protected async override void OnAppearing() {
+		base.OnAppearing();
+		await Refresh();
+	}
 
 	public async Task Refresh()
 	{
-        var data = await _dataStore.AllSpecies();
+        var data = await DataStore.AllSpecies();
         _species = new ObservableCollection<Species>(data);
+		//await DisplayAlert("Info", $"Daten geladen: {_species.Count}", "Okay");
         list.ItemsSource = _species;
     }
 
@@ -54,7 +59,7 @@ public partial class MainPage : ContentPage {
 
 	private async Task SpeciesUpdate(Species species) {
 		try {
-			var newSpecies = await _dataStore.SpeciesUpdate(species);
+			var newSpecies = await DataStore.SpeciesUpdate(species);
 			((Species)list.SelectedItem).CopyFrom(newSpecies);
 			await Refresh();
         } catch (DataStoreConflictDeletedException) {
@@ -65,7 +70,7 @@ public partial class MainPage : ContentPage {
 			var shouldRecreate = (bool)await this.ShowPopupAsync(popUp);
 
 			if (shouldRecreate) {
-				await _dataStore.SpeciesAdd(species);
+				await DataStore.SpeciesAdd(species);
 			} else {
 				_species.Remove((Species)list.SelectedItem);
 			}
@@ -81,20 +86,20 @@ public partial class MainPage : ContentPage {
 	}
 
 	private async void ConflictPage_OneDone(object sender, Species species) {
-		var newSpecies = await _dataStore.SpeciesUpdate(species, true);
+		var newSpecies = await DataStore.SpeciesUpdate(species, true);
 		((Species)list.SelectedItem).CopyFrom(newSpecies);
 		await Refresh();
     }
 
 	private async Task SpeciesNew(Species species) {
-		var newSpecies = await _dataStore.SpeciesAdd(species);
+		var newSpecies = await DataStore.SpeciesAdd(species);
 		_species.Add(newSpecies);
 	}
 
 	private async void BtnDelete_Clicked(object sender, EventArgs e) {
 		var species = (Species)((Button)sender).Parent.Parent.BindingContext;
 		try {
-			await _dataStore.SpeciesRemove(species);
+			await DataStore.SpeciesRemove(species);
 			_species.Remove(species);
             await Refresh();
         }
@@ -106,7 +111,7 @@ public partial class MainPage : ContentPage {
 			var shouldDelete = (bool)await this.ShowPopupAsync(popUp);
 
 			if (shouldDelete) {
-				await _dataStore.SpeciesRemove(species, true);
+				await DataStore.SpeciesRemove(species, true);
 				_species.Remove(species);
 			}
 			
@@ -118,4 +123,8 @@ public partial class MainPage : ContentPage {
     {
 		await Refresh();
     }
+
+	private void BtnLogout_Clicked(object sender, EventArgs e) {
+		((App)this.Parent.Parent.Parent).Logout();
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using Shared;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace MauiApp1.Services;
@@ -11,8 +12,13 @@ public class WebDataStore : DataStore {
 		_http.BaseAddress = new Uri("https://mc.schertmi.net/api/Species/");
 	}
 
-	public Task<List<Species>> AllSpecies()
-		=> _http.GetFromJsonAsync<List<Species>>("");
+	public async Task<List<Species>> AllSpecies() {
+		var res = await _http.GetAsync("");
+		if (res.StatusCode == HttpStatusCode.Unauthorized) {
+			throw new DataStoreNoAuthException();
+		}
+		return await res.Content.ReadFromJsonAsync<List<Species>>();
+	}
 
 	public Task<Species> SpeciesGet(int id)
 		=> _http.GetFromJsonAsync<Species>($"{id}");
@@ -70,5 +76,9 @@ public class WebDataStore : DataStore {
 		if (!resp.IsSuccessStatusCode) {
 			throw new DataStoreConflictException();
 		}
+	}
+
+	public void SetIdToken(string token) {
+		_http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 	}
 }

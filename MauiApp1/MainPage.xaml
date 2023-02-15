@@ -42,8 +42,9 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button
             Text="Add Species"
@@ -57,6 +58,10 @@
             Grid.Column="1"
             Clicked="OnRefreshClicked">
             </Button>
+            <Button
+                Text="Logout"
+                Grid.Column="2"
+                Clicked="BtnLogout_Clicked"></Button>
         </Grid>
     </StackLayout>
 </ContentPage>

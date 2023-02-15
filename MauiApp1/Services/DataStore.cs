@@ -8,7 +8,7 @@ public interface DataStore
 
 	Task<Species> SpeciesGet(int id);
 
-	Task<Species> SpeciesAdd(Species Species);
+	Task<Species> SpeciesAdd(Species species);
 
 	/// <exception cref="DataStoreConflictDeletedException"></exception>
 	/// <exception cref="DataStoreConflictChangedException{T}"></exception>
@@ -16,4 +16,6 @@ public interface DataStore
 
 	/// <exception cref="DataStoreConflictChangedException{T}"></exception>
 	Task SpeciesRemove(Species species, bool force = false);
+
+	void SetIdToken(string token);
 }

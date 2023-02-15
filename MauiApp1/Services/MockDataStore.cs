@@ -74,4 +74,6 @@ public class MockDataStore : DataStore {
 
 		return Task.CompletedTask;
 	}
+
+	public void SetIdToken(string token) { }
 }
