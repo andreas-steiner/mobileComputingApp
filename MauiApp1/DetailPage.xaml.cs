@@ -30,7 +30,10 @@ public partial class DetailPage : ContentPage
         SubListe = new ObservableCollection<SubRace>(species.SubRaces);
         SubList.ItemsSource = SubListe;
 
-        Species = species;
+        UserName.Text = "User: " + species.LastEditFrom;
+        EditedTime.Text = species.LastEdited.ToString();
+
+		Species = species;
     }
 
     public void OnAddLangClicked(object sender, EventArgs args) 

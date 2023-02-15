@@ -21,8 +21,6 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".3*"></ColumnDefinition>
@@ -366,6 +364,19 @@
                         Clicked="OnAddSubClickedServer">
                 </Button>
             </HorizontalStackLayout>
+
+            <Label
+                Text="Server Info:"
+                Grid.Row="12"></Label>
+            <Label Text="User: "
+                   x:Name="UserName"
+                    Grid.Row="12"
+                    Grid.Column="0"></Label>
+            <Label Text="User: "
+                   x:Name="EditedTime"
+                    Grid.Row="12"
+                    Grid.Column="1"></Label>
+            
             <Button
                 Text="Save Species"
                 Grid.Row="20"

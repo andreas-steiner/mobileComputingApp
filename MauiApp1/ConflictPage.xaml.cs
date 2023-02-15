@@ -47,7 +47,10 @@ public partial class ConflictPage : ContentPage
         TraitListServer.ItemsSource = TraitListeServer;
         SubListeServer = new ObservableCollection<SubRace>(server.SubRaces);
         SubListServer.ItemsSource = SubListeServer;
-    }
+
+		UserName.Text = "User: " + server.LastEditFrom;
+		EditedTime.Text = server.LastEdited.ToString();
+	}
 
     public void OnAddLangClicked(object sender, EventArgs args)
     {

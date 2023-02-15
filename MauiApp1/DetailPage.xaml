@@ -21,6 +21,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".3*"></ColumnDefinition>
@@ -215,12 +216,22 @@
                         Clicked="OnAddSubClicked">
                 </Button>
             </HorizontalStackLayout>
+            
+            <!-- UserName Letzte Bearbeitung -->
+            <Label Text="User: "
+                   x:Name="UserName"
+                    Grid.Row="11"
+                    Grid.Column="0"></Label>
+            <Label Text="User: "
+                   x:Name="EditedTime"
+                    Grid.Row="11"
+                    Grid.Column="1"></Label>
+            
             <Button
                 Text="Save Species"
-                Grid.Row="20"
-                Grid.Column="1"
-                WidthRequest="100"
-                HorizontalOptions="Start"
+                Grid.Row="12"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Background="green"
                 Clicked="OnSaveSpeciesClicked">
             </Button>
