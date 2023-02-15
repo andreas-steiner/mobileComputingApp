@@ -6,8 +6,9 @@ public partial class App : Application
 {
 	private readonly Page _loginPage;
 	private readonly DataStore _dataStore;
+	private readonly HttpClient _http;
 
-	public App(DataStore dataStore)
+	public App(DataStore dataStore, HttpClient http)
 	{
 		InitializeComponent();
 
@@ -24,6 +25,7 @@ public partial class App : Application
 		MainPage = _loginPage;
 
 		_dataStore = dataStore;
+		_http = http;
 	}
 
 	protected async override void OnStart() {
@@ -69,6 +71,7 @@ public partial class App : Application
 
 	public void Logout() {
 		SecureStorage.Remove("id_token");
+		_http.DefaultRequestHeaders.Authorization = null;
 		MainPage = _loginPage;
 	}
 }

@@ -27,7 +27,6 @@ public partial class MainPage : ContentPage {
 	{
         var data = await DataStore.AllSpecies();
         _species = new ObservableCollection<Species>(data);
-		//await DisplayAlert("Info", $"Daten geladen: {_species.Count}", "Okay");
         list.ItemsSource = _species;
     }
 
@@ -125,6 +124,6 @@ public partial class MainPage : ContentPage {
     }
 
 	private void BtnLogout_Clicked(object sender, EventArgs e) {
-		((App)this.Parent.Parent.Parent).Logout();
+		((App)Parent.Parent.Parent).Logout();
 	}
 }
